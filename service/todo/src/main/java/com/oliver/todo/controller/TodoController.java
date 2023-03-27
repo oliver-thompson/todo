@@ -15,4 +15,9 @@ public class TodoController {
     public Todo getTodo(@PathVariable(name="id") int todoId){
         return todoService.getTodo(todoId);
     }
+
+    @PostMapping("")
+    public Todo createTodo(Todo todo){
+        return todoService.createTodo(todo);
+    }
 }

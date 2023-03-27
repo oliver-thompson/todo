@@ -23,4 +23,8 @@ public class TodoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No todo exists with id " + todoId);
         }
     }
+
+    public Todo createTodo(Todo todo) {
+        return todoRepository.save(todo);
+    }
 }
