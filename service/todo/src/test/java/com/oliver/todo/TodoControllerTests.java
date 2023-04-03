@@ -17,8 +17,8 @@ class TodoControllerTests {
     @Test
     void todoCanBeCreated(){
         Todo todo = new Todo(1, "test todo", Date.valueOf("2020-01-01"));
-        when(todoRepository.save(any(Todo.class))).thenReturn(todoRepository.findById(1).get());
+        when(todoRepository.save(any(Todo.class))).thenReturn(todo);
         Todo createdTodo = todoRepository.save(todo);
-        assertThat(createdTodo.getId()).isEqualTo(1);
+        assertThat(createdTodo).isEqualTo(todo);
     }
 }
