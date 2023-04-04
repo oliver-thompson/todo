@@ -20,4 +20,9 @@ public class TodoController {
     public Todo createTodo(Todo todo){
         return todoService.createTodo(todo);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteTodo(@PathVariable(name = "id") int todoId){
+        todoService.delete(todoId);
+    }
 }
