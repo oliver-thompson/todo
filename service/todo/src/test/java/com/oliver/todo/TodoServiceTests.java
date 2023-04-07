@@ -6,11 +6,14 @@ import com.oliver.todo.service.TodoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Date;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
@@ -41,6 +44,15 @@ class TodoServiceTests {
         when(todoRepository.findById(anyInt())).thenReturn(Optional.of(todo2));
         Todo retrievedTodo = todoService.getTodo(2);
         assertThat(retrievedTodo).isEqualTo(todo2);
+    }
+
+    @Test
+    void getTodoByIdThrowsExceptionForBadId() {
+        int todoId = 3;
+        when(todoRepository.findById(anyInt())).thenReturn(Optional.ofNullable(null));
+        assertThrows(ResponseStatusException.class, () -> {
+            todoService.getTodo(todoId);
+        });
     }
 
     @Test
