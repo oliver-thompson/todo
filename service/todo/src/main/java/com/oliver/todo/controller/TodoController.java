@@ -25,4 +25,10 @@ public class TodoController {
     public void deleteTodo(@PathVariable(name = "id") int todoId){
         todoService.deleteTodo(todoId);
     }
+
+    @PutMapping("/{id}")
+    public Todo updateTodo(@PathVariable(name = "id") int todoId,
+                           @PathVariable(name = "todo") Todo todoToUpdate){
+        return todoService.updateTodo(todoId, todoToUpdate);
+    }
 }
