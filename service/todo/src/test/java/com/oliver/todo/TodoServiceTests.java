@@ -9,6 +9,8 @@ import org.mockito.Mockito;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,6 +37,17 @@ class TodoServiceTests {
         assertThat(createdTodo.getDescription()).isEqualTo(todo.getDescription());
         assertThat(createdTodo.getDate()).isEqualTo(todo.getDate());
         assertThat(createdTodo.getId()).isEqualTo(todo.getId());
+    }
+
+    @Test
+    void getAllTodosReturnsAllTodos(){
+        List<Todo> todoList = new ArrayList<>(
+                List.of(new Todo(1, "test todo", Date.valueOf("2020-01-01")),
+                        new Todo(2, "2nd todo", Date.valueOf("2020-02-02")),
+                        new Todo(3, "todo to delete", Date.valueOf("2020-03-03"))));
+        when(todoRepository.findAll()).thenReturn(todoList);
+        List<Todo> retrievedTodoList = todoService.getAllTodos();
+        assertThat(todoList).isEqualTo(retrievedTodoList);
     }
 
     @Test
