@@ -12,12 +12,10 @@ import java.sql.Date;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class TodoServiceTests {
     private final TodoRepository todoRepository = Mockito.mock(TodoRepository.class);
@@ -49,7 +47,7 @@ class TodoServiceTests {
     @Test
     void getTodoByIdThrowsExceptionForBadId() {
         int todoId = 3;
-        when(todoRepository.findById(anyInt())).thenReturn(Optional.ofNullable(null));
+        when(todoRepository.findById(anyInt())).thenReturn(Optional.empty());
         assertThrows(ResponseStatusException.class, () -> {
             todoService.getTodo(todoId);
         });
@@ -58,7 +56,16 @@ class TodoServiceTests {
     @Test
     void todoCanBeDeleted() {
         Todo todo3 = new Todo(3, "todo to delete", Date.valueOf("2020-03-03"));
-        todoService.delete(todo3.getId());
+        todoService.deleteTodo(todo3.getId());
         verify(todoRepository).deleteById(3);
+    }
+
+    @Test
+    void deleteTodoThrowsExceptionForBadId() {
+        int todoId = 3;
+        doThrow(ResponseStatusException.class).when(todoRepository).deleteById(anyInt());
+        assertThrows(ResponseStatusException.class, () -> {
+            todoService.deleteTodo(todoId);
+        });
     }
 }

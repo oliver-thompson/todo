@@ -23,6 +23,6 @@ public class TodoController {
 
     @DeleteMapping("/{id}")
     public void deleteTodo(@PathVariable(name = "id") int todoId){
-        todoService.delete(todoId);
+        todoService.deleteTodo(todoId);
     }
 }

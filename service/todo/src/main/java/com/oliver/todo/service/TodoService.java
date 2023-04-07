@@ -29,7 +29,11 @@ public class TodoService {
         return todoRepository.save(todo);
     }
 
-    public void delete(int todoId) {
-        todoRepository.deleteById(todoId);
+    public void deleteTodo(int todoId) {
+        try{
+            todoRepository.deleteById(todoId);
+        } catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No todo exists with id " + todoId);
+        }
     }
 }
