@@ -36,4 +36,17 @@ public class TodoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No todo exists with id " + todoId);
         }
     }
+
+    public Todo updateTodo(int todoId, Todo todoToBeUpdated) {
+        Optional<Todo> todo = todoRepository.findById(todoId);
+        if (todo.isPresent()){
+            Todo newTodo = todo.get();
+            newTodo.setDescription(todoToBeUpdated.getDescription());
+            newTodo.setDate(todoToBeUpdated.getDate());
+            return todoRepository.save(newTodo);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No todo exists with id " + todoId);
+        }
+    }
 }

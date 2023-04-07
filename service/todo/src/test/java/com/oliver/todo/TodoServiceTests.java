@@ -20,15 +20,16 @@ import static org.mockito.Mockito.*;
 class TodoServiceTests {
     private final TodoRepository todoRepository = Mockito.mock(TodoRepository.class);
     private TodoService todoService;
+    private Todo todo;
 
     @BeforeEach
     void setup() {
         this.todoService = new TodoService(todoRepository);
+        this.todo = new Todo(1, "test todo", Date.valueOf("2020-01-01"));
     }
 
     @Test
     void todoCanBeCreated() {
-        Todo todo = new Todo(1, "test todo", Date.valueOf("2020-01-01"));
         when(todoRepository.save(any(Todo.class))).thenReturn(todo);
         Todo createdTodo = todoService.createTodo(todo);
         assertThat(createdTodo.getDescription()).isEqualTo(todo.getDescription());
@@ -68,4 +69,22 @@ class TodoServiceTests {
             todoService.deleteTodo(todoId);
         });
     }
+
+    @Test
+    void todoCanBeUpdated(){
+        Todo todoToBeUpdated = new Todo(1, "updated todo with id 1", Date.valueOf("2021-01-01"));
+        when(todoRepository.findById(1)).thenReturn(Optional.ofNullable(todo));
+        when(todoRepository.save(any(Todo.class))).thenReturn(todoToBeUpdated);
+        assertThat(todoService.updateTodo(1, todoToBeUpdated)).isEqualTo(todoToBeUpdated);
+    }
+
+    @Test
+    void updateTodoThrowsExceptionForBadId() {
+        Todo todoToBeUpdated = new Todo(1, "updated todo with id 1", Date.valueOf("2021-01-01"));
+        when(todoRepository.findById(anyInt())).thenReturn(Optional.empty());
+        assertThrows(ResponseStatusException.class, () -> {
+            todoService.updateTodo(1, todoToBeUpdated);
+        });
+    }
+
 }
