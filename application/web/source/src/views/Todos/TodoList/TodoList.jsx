@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import getTodos from "../getTodos";
+import { getAllTodos } from "../../../services/Todo/todoApi";
 import Todo from "../Todo/Todo";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    setTodos(getTodos());
+    fetch("http://localhost:8080/todos/")
+      .then((response) => response.json())
+      .then((data) => setTodos(data));
   }, []);
 
   const renderTodoList = () => {
