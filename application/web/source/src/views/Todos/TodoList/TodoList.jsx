@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { getAllTodos } from "../../../services/Todo/todoApi";
 import Todo from "../Todo/Todo";
 
 const TodoList = () => {
@@ -16,7 +15,7 @@ const TodoList = () => {
       <ul>
         {todos.map((todo) => {
           console.log("todo in todos.jsx", todo);
-          return <Todo todo={todo} />;
+          return <Todo todo={todo} key={todo.id} />;
         })}
       </ul>
     );
