@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/todos")
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:3000/")
+@RequestMapping(value = "/todos")
 public class TodoController {
     @Autowired
     private TodoService todoService;
@@ -25,7 +25,7 @@ public class TodoController {
     }
 
     @PostMapping("/")
-    public Todo createTodo(Todo todo){
+    public Todo createTodo(@RequestBody Todo todo){
         return todoService.createTodo(todo);
     }
 

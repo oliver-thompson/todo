@@ -14,6 +14,7 @@ public class TodoService {
     private final TodoRepository todoRepository;
 
     public TodoService(TodoRepository todoRepository) {
+        //if repository is null, throw a null argument exception. repository needs to be valid
         this.todoRepository = todoRepository;
     }
 
