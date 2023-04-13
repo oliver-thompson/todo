@@ -15,9 +15,6 @@ const Todos = () => {
   };
 
   const handleClick = (e) => {
-    e.preventDefault();
-    console.log(description);
-    console.log(date);
     const req = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
