@@ -10,18 +10,15 @@ const TodoList = () => {
       .then((data) => setTodos(data));
   }, []);
 
-  const renderTodoList = () => {
-    return (
-      <ul>
-        {todos.map((todo) => {
-          console.log("todo in todos.jsx", todo);
-          return <Todo todo={todo} key={todo.id} />;
-        })}
-      </ul>
-    );
-  };
-
-  return renderTodoList();
+  return todos.length ? (
+    <ul>
+      {todos.map((todo) => {
+        return <Todo todo={todo} key={todo.id} />;
+      })}
+    </ul>
+  ) : (
+    <p>You have no to-dos</p>
+  );
 };
 
 export default TodoList;
