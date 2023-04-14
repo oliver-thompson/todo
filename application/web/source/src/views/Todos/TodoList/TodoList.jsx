@@ -10,10 +10,24 @@ const TodoList = () => {
       .then((data) => setTodos(data));
   }, []);
 
+  const handleDelete = (e, todoId) => {
+    const req = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: todoId,
+      }),
+    };
+
+    fetch(`http://localhost:8080/todos/${todoId}`, req).then(
+      setTodos(todos.filter((todo) => todo.id !== todoId))
+    );
+  };
+
   return todos.length ? (
     <ul>
       {todos.map((todo) => {
-        return <Todo todo={todo} key={todo.id} />;
+        return <Todo handleDelete={handleDelete} todo={todo} key={todo.id} />;
       })}
     </ul>
   ) : (

@@ -30,7 +30,7 @@ public class TodoController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTodo(@PathVariable(name = "id") int todoId){
+    public void deleteTodo(@PathVariable(name = "id") @RequestBody int todoId){
         todoService.deleteTodo(todoId);
     }
 

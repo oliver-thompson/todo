@@ -15,6 +15,8 @@ const Todos = () => {
   };
 
   const handleClick = (e) => {
+    // NEED TO ADD A CHECK FOR NULL, SHOULD NOT WORK
+
     const req = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
