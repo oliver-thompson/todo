@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import TodoList from "./TodoList/TodoList";
+import "./TodosView.css"
 
 const TodosView = () => {
   // possible to remove description and date from here?
@@ -57,7 +58,7 @@ const TodosView = () => {
         <label>Due date</label>
         <input type="date" onChange={handleDateChange} />
         <button onClick={handleClick}>Add to-do</button>
-        <div>{errorMessage}</div>
+        <div id="error-message">{errorMessage}</div>
       </form>
 
     </div>
