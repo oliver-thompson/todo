@@ -21,6 +21,7 @@ const Todo = ({ todo, handleDelete, handleUpdate }) => {
   const handleConfirm = (e) => {
     e.preventDefault();
     setIsEditable(false)
+    handleUpdate(e, todo.id, description, date);
   }
 
   const handleReject = (e) => {

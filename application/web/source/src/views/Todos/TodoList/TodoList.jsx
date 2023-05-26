@@ -25,14 +25,13 @@ const TodoList = () => {
   };
 
   const handleUpdate = (e, todoId, description, date) => {
-    console.log("updated")
     const req = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: todoId,
-        description: "new description",
-        date: "2023-05-26",
+        description: description,
+        date: date,
       })
     };
     fetch(`http://localhost:8080/todos/${todoId}`, req).then(
