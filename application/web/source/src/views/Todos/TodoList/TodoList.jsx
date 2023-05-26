@@ -24,10 +24,26 @@ const TodoList = () => {
     );
   };
 
+  const handleUpdate = (e, todoId, description, date) => {
+    console.log("updated")
+    const req = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: todoId,
+        description: "new description",
+        date: "2023-05-26",
+      })
+    };
+    fetch(`http://localhost:8080/todos/${todoId}`, req).then(
+      console.log("updated")
+    )
+  }
+
   return todos.length ? (
     <ul>
       {todos.map((todo) => {
-        return <Todo handleDelete={handleDelete} todo={todo} key={todo.id} />;
+        return <Todo handleDelete={handleDelete} handleUpdate={handleUpdate} todo={todo} key={todo.id} />;
       })}
     </ul>
   ) : (

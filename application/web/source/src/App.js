@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Landing from "./views/Landing/Landing";
-import Todos from "./views/Todos/Todos";
+import Todos from "./views/Todos/TodosView";
 
 function App() {
   return (

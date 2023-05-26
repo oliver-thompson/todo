@@ -2,12 +2,13 @@ import React from "react";
 import { useState } from "react";
 import TodoList from "./TodoList/TodoList";
 
-const Todos = () => {
+const TodosView = () => {
+  // possible to remove description and date from here?
   const [description, setDescription] = useState();
   const [date, setDate] = useState();
   const [errorMessage, setErrorMessage] = useState("")
 
-  const handleChange = (e) => {
+  const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
 
@@ -35,10 +36,10 @@ const Todos = () => {
       }),
     };
     fetch("http://localhost:8080/todos/", req)
-    resetInputs()
+    resetForm()
   }
 
-  const resetInputs = () => {
+  const resetForm = () => {
     setDate()
     setDescription()
     let formElement = document.getElementById("create-todo");
@@ -52,7 +53,7 @@ const Todos = () => {
 
       <form id="create-todo">
         <label>What do you need to do?</label>
-        <input onChange={handleChange} />
+        <input onChange={handleDescriptionChange} />
         <label>Due date</label>
         <input type="date" onChange={handleDateChange} />
         <button onClick={handleClick}>Add to-do</button>
@@ -63,4 +64,4 @@ const Todos = () => {
   );
 };
 
-export default Todos;
+export default TodosView;
