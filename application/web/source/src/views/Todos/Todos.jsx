@@ -5,6 +5,7 @@ import TodoList from "./TodoList/TodoList";
 const Todos = () => {
   const [description, setDescription] = useState();
   const [date, setDate] = useState();
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleChange = (e) => {
     setDescription(e.target.value);
@@ -15,8 +16,16 @@ const Todos = () => {
   };
 
   const handleClick = (e) => {
-    // NEED TO ADD A CHECK FOR NULL, SHOULD NOT WORK
+    e.preventDefault()
+    if (description === undefined || date === undefined) {
+      setErrorMessage("Description and date are required.");
+    } else {
+      setErrorMessage("")
+      postTodo();
+    }
+  };
 
+  const postTodo = () => {
     const req = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -25,23 +34,31 @@ const Todos = () => {
         date: date,
       }),
     };
-    fetch("http://localhost:8080/todos/", req).then((response) =>
-      console.log(response)
-    );
-  };
+    fetch("http://localhost:8080/todos/", req)
+    resetInputs()
+  }
+
+  const resetInputs = () => {
+    setDate()
+    setDescription()
+    let formElement = document.getElementById("create-todo");
+    formElement.reset();
+  }
 
   return (
     <div>
       <h3>My To-dos</h3>
       <TodoList />
 
-      <form>
+      <form id="create-todo">
         <label>What do you need to do?</label>
         <input onChange={handleChange} />
         <label>Due date</label>
         <input type="date" onChange={handleDateChange} />
         <button onClick={handleClick}>Add to-do</button>
+        <div>{errorMessage}</div>
       </form>
+
     </div>
   );
 };
