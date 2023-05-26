@@ -34,16 +34,16 @@ const Todo = ({ todo, handleDelete, handleUpdate }) => {
       <form>
         {isEditable ?
           <>
-            <label>description: </label>
+            <label>Description: </label>
             <input value={description} onChange={handleDescriptionChange} />
-            <label>Due date</label>
+            <label> Due date: </label>
             <input type="date" value={date} onChange={handleDateChange} />
             <button onClick={handleConfirm}>confirm changes</button>
             <button onClick={handleReject}>reject changes</button>
           </> :
           <>
-            <span>description: {description}</span>
-            <span>due date: {date}</span>
+            <span>Description: {description} | </span>
+            <span>Due Date: {date} | </span>
             <button onClick={setEditable}>edit</button>
             <button onClick={(e) => handleDelete(e, todo.id)}>delete</button>
           </>
