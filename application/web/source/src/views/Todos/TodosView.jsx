@@ -1,6 +1,6 @@
 import React from "react";
 import TodoList from "./TodoList/TodoList";
-import CreateTodoForm from "./CreateTodoForm";
+import CreateTodoForm from "./CreateTodoForm/CreateTodoForm";
 
 const TodosView = () => {
 
