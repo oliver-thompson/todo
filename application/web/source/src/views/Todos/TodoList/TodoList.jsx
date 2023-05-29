@@ -10,8 +10,12 @@ const TodoList = () => {
   }, [todos]);
 
   const handleDelete = (e, todoId) => {
-    deleteTodo(todoId)
-    setTodos(todos.filter((todo) => todo.id !== todoId))
+    e.preventDefault();
+    const deleteConfirmed = window.confirm('You are about to delete this task. Are you sure?')
+    if (deleteConfirmed) {
+      deleteTodo(todoId)
+      setTodos(todos.filter((todo) => todo.id !== todoId))
+    }
   };
 
   const handleUpdate = (e, todoId, description, date) => {
