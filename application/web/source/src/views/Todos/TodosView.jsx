@@ -15,7 +15,7 @@ const TodosView = () => {
       <TodoList />
 
       {isCreateFormShown ?
-        <CreateTodoForm isCreateFormShown={isCreateFormShown} setCreateFormShown={setCreateFormShown} />
+        <CreateTodoForm setCreateFormShown={setCreateFormShown} />
         :
         <button onClick={setCreateFormShown}>Add task</button>
       }
