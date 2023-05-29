@@ -2,7 +2,7 @@ import { React, useState } from 'react'
 import { postTodo } from "../../../api/todo";
 import "./CreateTodoForm.css"
 
-const CreateTodoForm = ({ isCreateFormShown, setCreateFormShown }) => {
+const CreateTodoForm = ({ setCreateFormShown }) => {
   // possible to remove description and date state from here? they exist in Todo.jsx
   const [description, setDescription] = useState();
   const [date, setDate] = useState();
