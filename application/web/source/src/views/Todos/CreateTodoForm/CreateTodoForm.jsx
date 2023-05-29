@@ -2,7 +2,7 @@ import { React, useState } from 'react'
 import { postTodo } from "../../../api/todo";
 import "./CreateTodoForm.css"
 
-const CreateTodoForm = () => {
+const CreateTodoForm = ({ setCreateFormShown }) => {
   // possible to remove description and date state from here? they exist in Todo.jsx
   const [description, setDescription] = useState();
   const [date, setDate] = useState();
@@ -30,6 +30,7 @@ const CreateTodoForm = () => {
   const resetForm = () => {
     setDate()
     setDescription()
+    setCreateFormShown()
     let formElement = document.getElementById("create-todo");
     formElement.reset();
   }
@@ -42,6 +43,7 @@ const CreateTodoForm = () => {
         <label>Due date</label>
         <input type="date" onChange={handleDateChange} />
         <button onClick={handleClick}>Add to-do</button>
+        <button onClick={resetForm}>cancel</button>
         <div id="error-message">{errorMessage}</div>
       </form>
     </div>
