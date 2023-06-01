@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.sql.Date;
 
 @Entity
-@Table(name="todos")
+@Table(name="_todo")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Todo {
@@ -30,7 +30,17 @@ public class Todo {
     @Getter @Setter
     private Date date;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User _user;
+
     public Todo(int id){
         this.id = id;
+    }
+
+    public Todo(int id, String description, Date date){
+        this.id = id;
+        this.description = description;
+        this.date = date;
     }
 }
