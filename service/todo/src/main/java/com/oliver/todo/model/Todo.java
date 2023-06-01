@@ -15,8 +15,8 @@ import java.sql.Date;
 @NoArgsConstructor
 public class Todo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "todo_id", columnDefinition = "INT NOT NULL AUTO_INCREMENT")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "todo_id", nullable = false)
     @Getter @Setter
     private int id;
 
