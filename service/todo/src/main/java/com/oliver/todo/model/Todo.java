@@ -13,21 +13,19 @@ import java.sql.Date;
 @Table(name="_todo")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter @Setter
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "todo_id", nullable = false)
-    @Getter @Setter
     private int id;
 
     @Column(name = "description")
-    @Getter @Setter
     private String description;
 
 
     @Schema(type = "string", format = "date")
     @Column(name = "date")
-    @Getter @Setter
     private Date date;
 
     @ManyToOne

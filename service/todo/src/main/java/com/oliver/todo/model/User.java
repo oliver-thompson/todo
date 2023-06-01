@@ -12,12 +12,18 @@ import java.util.List;
 @Table(name="_user")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter @Setter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
-    @Getter @Setter
     private int id;
+
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false)
+    private String password;
 
     @OneToMany(mappedBy = "_user")
     private List<Todo> todos;
